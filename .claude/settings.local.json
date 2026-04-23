@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm run db:seed:*)",
+      "Bash(ls \"D:\\\\İsimler\\\\randevuzamani\\\\node_modules\\\\next\\\\dist\\\\docs\"\" 2>/dev/null || echo \"Docs folder not found \")",
+      "Bash(dir \"D:\\\\İsimler\\\\randevuzamani\\\\node_modules\\\\next\\\\dist\\\\docs\")",
+      "Bash(npx tsx:*)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm run build:*)",
+      "Bash(curl:*)",
+      "Bash(node -e:*)",
+      "Bash(ls -la \"D:\\\\İsimler\\\\randevuzamani\\\\public\\\\icons\"\" 2>/dev/null || echo \"Icons folder empty or not exists \")",
+      "Bash(findstr:*)",
+      "Bash(find:*)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Fiyat Takip",
+  "short_name": "FiyatTakip",
+  "description": "Alkollü içecek fiyat takip ve bilgilendirme platformu",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#7c3aed",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "tr",
+  "categories": ["shopping", "utilities"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ürünler",
+      "short_name": "Ürünler",
+      "description": "Tüm ürünleri görüntüle",
+      "url": "/urunler"
+    },
+    {
+      "name": "Kampanyalar",
+      "short_name": "Kampanyalar",
+      "description": "Aktif kampanyaları görüntüle",
+      "url": "/kampanyalar"
+    },
+    {
+      "name": "Favorilerim",
+      "short_name": "Favoriler",
+      "description": "Favori ürünlerim",
+      "url": "/hesabim/favorilerim"
+    }
+  ]
+}
