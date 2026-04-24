@@ -52,6 +52,7 @@ export const productSchema = z.object({
   isActive: z.boolean().default(true),
   isFeatured: z.boolean().default(false),
   isNew: z.boolean().default(false),
+  images: z.string().optional().nullable(),
   metaTitle: z.string().max(60, "Meta başlık en fazla 60 karakter olabilir").optional(),
   metaDescription: z.string().max(160, "Meta açıklama en fazla 160 karakter olabilir").optional(),
 });

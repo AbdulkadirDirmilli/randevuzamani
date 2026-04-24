@@ -26,6 +26,22 @@ import { useToast } from "@/components/ui/use-toast";
 import { createProduct, updateProduct } from "@/actions/product.actions";
 import { slugify } from "@/lib/utils";
 
+function parseFirstImageUrl(images?: string | null): string {
+  if (!images) return "";
+  const trimmed = images.trim();
+  if (!trimmed) return "";
+  if (trimmed.startsWith("[")) {
+    try {
+      const arr = JSON.parse(trimmed);
+      if (Array.isArray(arr) && typeof arr[0] === "string") return arr[0];
+    } catch {
+      return "";
+    }
+    return "";
+  }
+  return trimmed;
+}
+
 interface Category {
   id: string;
   name: string;
@@ -54,6 +70,7 @@ interface Product {
   isActive: boolean;
   isFeatured: boolean;
   isNew: boolean;
+  images: string | null;
   metaTitle: string | null;
   metaDescription: string | null;
 }
@@ -86,6 +103,7 @@ export function ProductForm({ product, categories, brands }: ProductFormProps) {
     isActive: product?.isActive ?? true,
     isFeatured: product?.isFeatured ?? false,
     isNew: product?.isNew ?? false,
+    imageUrl: parseFirstImageUrl(product?.images),
     metaTitle: product?.metaTitle || "",
     metaDescription: product?.metaDescription || "",
   });
@@ -103,17 +121,20 @@ export function ProductForm({ product, categories, brands }: ProductFormProps) {
     setIsLoading(true);
 
     try {
+      const { imageUrl, ...rest } = formData;
+      const trimmedUrl = imageUrl.trim();
       const data = {
-        ...formData,
-        basePrice: Number(formData.basePrice),
-        currentPrice: Number(formData.currentPrice),
-        discountedPrice: formData.discountedPrice
-          ? Number(formData.discountedPrice)
+        ...rest,
+        basePrice: Number(rest.basePrice),
+        currentPrice: Number(rest.currentPrice),
+        discountedPrice: rest.discountedPrice
+          ? Number(rest.discountedPrice)
           : null,
-        stock: Number(formData.stock),
-        lowStockAlert: Number(formData.lowStockAlert),
-        brandId: formData.brandId || null,
-        categoryId: formData.categoryId || null,
+        stock: Number(rest.stock),
+        lowStockAlert: Number(rest.lowStockAlert),
+        brandId: rest.brandId || null,
+        categoryId: rest.categoryId || null,
+        images: trimmedUrl ? JSON.stringify([trimmedUrl]) : null,
       };
 
       const result = product
@@ -189,6 +210,30 @@ export function ProductForm({ product, categories, brands }: ProductFormProps) {
                   }
                   maxLength={200}
                 />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="imageUrl">Ürün Fotoğrafı URL</Label>
+                <Input
+                  id="imageUrl"
+                  type="url"
+                  value={formData.imageUrl}
+                  onChange={(e) =>
+                    setFormData({ ...formData, imageUrl: e.target.value })
+                  }
+                  placeholder="https://..."
+                />
+                <p className="text-xs text-muted-foreground">
+                  Boş bırakılırsa kategori bazlı varsayılan görsel kullanılır.
+                </p>
+                {formData.imageUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={formData.imageUrl}
+                    alt="Önizleme"
+                    className="h-32 w-32 rounded-lg object-cover border"
+                  />
+                )}
               </div>
 
               <div className="space-y-2">

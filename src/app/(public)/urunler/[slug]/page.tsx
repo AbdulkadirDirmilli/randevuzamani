@@ -150,6 +150,7 @@ export default async function UrunDetayPage({
               productName={product.name}
               categorySlug={product.category?.slug}
               brandName={product.brand?.name}
+              images={product.images}
               size="xl"
               className="w-full h-full"
             />
@@ -351,6 +352,7 @@ export default async function UrunDetayPage({
                         productName={relatedProduct.name}
                         categorySlug={product.category?.slug}
                         brandName={relatedProduct.brand?.name}
+                        images={relatedProduct.images}
                         size="xl"
                         className="w-full h-full group-hover:scale-105 transition-transform duration-300"
                       />

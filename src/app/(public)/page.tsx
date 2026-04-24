@@ -331,6 +331,7 @@ export default async function HomePage() {
                         productName={product.name}
                         categorySlug={product.category?.slug}
                         brandName={product.brand?.name}
+                        images={product.images}
                         size="xl"
                         className="w-full h-full group-hover:scale-105 transition-transform duration-300"
                       />
@@ -404,6 +405,7 @@ export default async function HomePage() {
                           productName={product.name}
                           categorySlug={undefined}
                           brandName={product.brand?.name}
+                          images={product.images}
                           size="xl"
                           className="w-full h-full group-hover:scale-105 transition-transform duration-300"
                         />
