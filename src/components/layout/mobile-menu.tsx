@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -113,13 +113,16 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   </>
                 )}
                 <Separator className="my-2" />
-                <Link
-                  href="/api/auth/signout"
-                  onClick={onClose}
-                  className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-destructive hover:bg-destructive/10"
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    signOut({ callbackUrl: "/" });
+                  }}
+                  className="flex w-full items-center rounded-md px-3 py-2 text-left text-sm font-medium text-destructive hover:bg-destructive/10"
                 >
                   Çıkış Yap
-                </Link>
+                </button>
               </div>
             ) : (
               <div className="space-y-2">
